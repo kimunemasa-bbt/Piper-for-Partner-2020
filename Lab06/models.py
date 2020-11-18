@@ -10,7 +10,8 @@
 import os
 import boto3
 from pymongo import MongoClient
-from werkzeug import secure_filename
+from werkzeug.utils import secure_filename
+from werkzeug.datastructures import  FileStorage
 from PIL import Image
 from config import ecs_test_drive
 
@@ -61,6 +62,7 @@ def upload_photo(file):
         img = Image.open(f)
         img.thumbnail(size)
         thumbfile = filename.rsplit(".",1)[0] + "-thumb.jpg"
+        print(thumbfile)
         img.save("uploads/" + thumbfile,"JPEG")
         img.close()
     
